@@ -1,0 +1,16 @@
+{
+  "bank": [
+    {
+      "id": "a370",
+      "firstName": "Erez",
+      "lastName": "Habani",
+      "phoneNumber": "0523021828",
+      "email": "erezhabani2003@gmail.com",
+      "adress": "Netzah israel 25 ",
+      "bank": "hapoalim",
+      "branchNumber": "626-547",
+      "creditCard": "123-456-789-125",
+      "current": 0
+    }
+  ]
+}

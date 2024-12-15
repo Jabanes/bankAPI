@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
+
+</head>
+
+<body>
+    <h1>BANK:</h1>
+    First Name: <input id="firstName" type="text"> <br>
+    Last Name: <input id="lastName" type="text"> <br>
+    Phone Number <input id="phoneNumber" type="number"> <br>
+    Email: <input id="email" type="email"> <br>
+    Adress: <input id="adress" type="text"> <br>
+    Bank: <select name="bank" id="bank"> <br>
+        <option value="hapoalim">Hapoalim</option>
+        <option value="leumi">Leumi</option>
+        <option value="discount">Discount</option>
+        <option value="Mizrahi-Tefahot">Mizrahi-Tefahot</option>
+    </select> <br>
+    Branch number: <input id="branchNumber" type="text"> <br>
+    Credit Card Number: <input id="creditCard" type="text"><br>
+    Current <input id="current" type="number"><br> <button onclick="create()">Submit</button>
+    <hr>
+
+    <div id="display"></div>
+</body>
+<script>
+    const SERVER = "http://localhost:3000/bank"
+
+    const read = () => axios(SERVER).then(res => document.getElementById("display").innerHTML = res.data.map(cust => `<button onclick ="del('${cust.id}')">delete</button> ${cust.firstName} ${cust.lastName} <button>details</button> <button onclick ="update('${cust.id}')">update</button>`).join(""))
+    read()
+
+
+    const getInput = () => ({
+
+        "firstName": document.getElementById("firstName").value,
+        "lastName": document.getElementById("lastName").value,
+        "phoneNumber": document.getElementById("phoneNumber").value,
+        "email": document.getElementById("email").value,
+        "adress": document.getElementById("adress").value,
+        "bank": document.getElementById("bank").value,
+        "branchNumber": document.getElementById("branchNumber").value,
+        "creditCard": document.getElementById("creditCard").value,
+        "current": parseInt(document.getElementById("current").value),
+    })
+
+
+    const create = () => axios.post(SERVER, getInput(), read())
+
+    const update = (id) => axios.put(SERVER + `/${id}`, getInput(), read())
+
+    const del = (id) => axios.delete(SERVER + `/${id}`, getInput() , read())
+
+    
+
+
+
+
+
+
+</script>
+
+</html>
